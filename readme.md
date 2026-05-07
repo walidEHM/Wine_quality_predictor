@@ -229,4 +229,4 @@ Quelques améliorations possibles :
 
 ## Auteur
 
-Projet réalisé dans le cadre du Club AIOIT.
+Projet réalisé dans le cadre du Club AIOIT (IFRI).
