@@ -4,7 +4,7 @@
 
 Ce projet de machine learning vise à prédire la qualité du vin rouge à partir de différentes caractéristiques physico-chimiques.
 
-Le notebook `Classification_red_wine.ipynb` présente l'ensemble du pipeline de data science :
+Les notebooks `Classification_red_wine.ipynb` et `forest.ipynb` présentent l'ensemble du pipeline de data science :
 - exploration des données
 - prétraitement
 - visualisation
@@ -141,9 +141,9 @@ Les métriques utilisées incluent :
 
 ## Sauvegarde du Modèle
 
-Le modèle entraîné ainsi que le scaler sont sauvegardés avec joblib :
-- `winequality-red.joblib`
-- `scaler-red.joblib`
+Le modèle entraîné ainsi que le scaler sont sauvegardés au format pickle dans le dossier `app/` :
+- `app/random_forest_model.pkl`
+- `app/scaler.pkl`
 
 ---
 
@@ -152,12 +152,15 @@ Le modèle entraîné ainsi que le scaler sont sauvegardés avec joblib :
 Exemple d'utilisation du modèle sur de nouvelles données :
 
 ```python
-import joblib
+import pickle
 import pandas as pd
 
 # Chargement du modèle et du scaler
-model = joblib.load('winequality-red.joblib')
-scaler = joblib.load('scaler-red.joblib')
+with open('app/random_forest_model.pkl', 'rb') as f:
+    model = pickle.load(f)
+    
+with open('app/scaler.pkl', 'rb') as f:
+    scaler = pickle.load(f)
 
 # Exemple de nouvelles données
 new_data = pd.DataFrame({
@@ -196,12 +199,19 @@ print(prediction)
 
 ```
 ├── Classification_red_wine.ipynb
-├── datasets/
-│   └── winequality-red.csv
+├── forest.ipynb
+├── readme.md
 ├── app/
-├── winequality-red.joblib
-├── scaler-red.joblib
-└── README.md
+│   ├── app.py
+│   ├── readme.md
+│   ├── random_forest_model.pkl
+│   ├── scaler.pkl
+│   └── templates/
+│       └── index.html
+└── datasets/
+    ├── winequality-red.csv
+    ├── winequality-white.csv
+    └── winequality.names
 ```
 
 ---
